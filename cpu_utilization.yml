@@ -1,0 +1,11 @@
+groups:
+   - name: High CPU Utilization
+     rules:
+     - alert: HighCPUUtilization
+       expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[1m])) * 100)  > 80
+       for: 1m
+       labels:
+         severity: critical
+       annotations:
+         title: High CPU Utilization on host
+         description: The CPU Utilization has exceeded 80% for 1 minute.

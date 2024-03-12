@@ -1,0 +1,11 @@
+groups:
+- name: high Request Error Rate
+  rules:
+  - alert: HighErrorRate
+    expr: (sum(rate(flask_http_request_total{status="500"}[1m])) / sum(rate(flask_http_request_total[1m]))) > 0.05
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High error rate detected in Flask app"
+      description: "Error rate exceeds 5% in the last minute"

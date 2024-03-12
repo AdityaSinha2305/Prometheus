@@ -1,0 +1,11 @@
+groups:
+- name: High Memory Utilization
+  rules:
+  - alert: HighMemoryUtilization
+    expr: (node_memory_MemFree_bytes / node_memory_MemTotal_bytes) * 100 < 20
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      title: High memory utilization on host
+      description: The memory utilization on host has exceeded 80% for 1 minute.
